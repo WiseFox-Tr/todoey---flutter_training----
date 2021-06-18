@@ -9,6 +9,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        inputDecorationTheme: InputDecorationTheme(
+          focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.lightBlueAccent)),
+          enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.lightBlueAccent)),
+        ),
+      ),
       home: TasksScreen(),
     );
   }
