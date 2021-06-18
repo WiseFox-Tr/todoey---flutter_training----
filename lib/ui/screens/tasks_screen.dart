@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoey_app/ui/widgets/TaskTile.dart';
 
 class TasksScreen extends StatelessWidget {
   @override
@@ -43,12 +44,20 @@ class TasksScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20.0),
                   topRight: Radius.circular(20.0),
                 ),
+              ),
+              child: ListView(
+                children: [
+                  TaskTile(taskName: 'Buy milk', isChecked: false,),
+                  TaskTile(taskName: 'Buy eggs', isChecked: false,),
+                  TaskTile(taskName: 'Buy bread', isChecked: true),
+                ],
               ),
             ),
           ),
