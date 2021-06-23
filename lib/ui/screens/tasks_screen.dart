@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todoey_app/ui/screens/add_task_screen.dart';
-import 'package:todoey_app/ui/widgets/TaskTile.dart';
+import 'package:todoey_app/ui/widgets/task_list.dart';
 
 class TasksScreen extends StatelessWidget {
   @override
@@ -53,13 +53,7 @@ class TasksScreen extends StatelessWidget {
                   topRight: Radius.circular(20.0),
                 ),
               ),
-              child: ListView(
-                children: [
-                  TaskTile(taskName: 'Buy milk', isChecked: false,),
-                  TaskTile(taskName: 'Buy eggs', isChecked: false,),
-                  TaskTile(taskName: 'Buy bread', isChecked: true),
-                ],
-              ),
+              child: TaskList()
             ),
           ),
         ],
