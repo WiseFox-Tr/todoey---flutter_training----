@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todoey_app/model/Task.dart';
-import 'package:todoey_app/ui/screens/add_task_screen.dart';
+import 'package:todoey_app/ui/screens/AddTaskScreen.dart';
 import 'package:todoey_app/ui/widgets/task_list.dart';
 
 class TasksScreen extends StatefulWidget {
