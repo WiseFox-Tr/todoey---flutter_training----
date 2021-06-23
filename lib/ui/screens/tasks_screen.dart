@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:todoey_app/model/Task.dart';
 import 'package:todoey_app/ui/screens/add_task_screen.dart';
 import 'package:todoey_app/ui/widgets/task_list.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+
+  List<Task> tasks = [
+    Task(name: 'buy bread'),
+    Task(name: 'buy milk'),
+    Task(name: 'buy eggs'),
+  ];
+  String taskInput;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +48,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '12 tasks',
+                  '${tasks.length} tasks',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20.0,
@@ -53,15 +67,29 @@ class TasksScreen extends StatelessWidget {
                   topRight: Radius.circular(20.0),
                 ),
               ),
-              child: TaskList()
+              child: TaskList(tasks: tasks),
             ),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => showModalBottomSheet(context: context, isScrollControlled: true, builder: (context) => AddTaskScreen()),
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (context) {
+              return AddTaskScreen(
+                addATaskCallback: () {
+                  setState(() => tasks.add(Task(name: taskInput.trim())));
+                  Navigator.pop(context);
+                },
+                updateTaskInputCallback: (newTask) => taskInput = newTask,
+              );
+            }
+          );
+        },
       ),
     );
   }
