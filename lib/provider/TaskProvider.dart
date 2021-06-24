@@ -18,11 +18,21 @@ class TaskProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  ///add a task with given name
   void addATask() {
     _tasks.add(Task(name: _taskInput.trim()));
     notifyListeners();
   }
 
+  ///delete a task only if it was done
+  void deleteATask(Task task) {
+    if(task.isDone) {
+      _tasks.remove(task);
+      notifyListeners();
+    }
+  }
+
+  ///change task status
   void updateTask(Task task) {
     task.toggleDone();
     notifyListeners();
