@@ -1,21 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:todoey_app/model/Task.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey_app/provider/TaskProvider.dart';
 import 'package:todoey_app/ui/screens/AddTaskScreen.dart';
 import 'package:todoey_app/ui/widgets/task_list.dart';
 
-class TasksScreen extends StatefulWidget {
-  @override
-  _TasksScreenState createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-
-  List<Task> tasks = [
-    Task(name: 'buy bread'),
-    Task(name: 'buy milk'),
-    Task(name: 'buy eggs'),
-  ];
-  String taskInput;
+class TasksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +37,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  '${tasks.length} tasks',
+                  '${Provider.of<TaskProvider>(context).tasksNumber} tasks',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20.0,
@@ -67,7 +56,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   topRight: Radius.circular(20.0),
                 ),
               ),
-              child: TaskList(tasks: tasks),
+              child: TaskList(),
             ),
           ),
         ],
@@ -76,19 +65,7 @@ class _TasksScreenState extends State<TasksScreen> {
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
         onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            isScrollControlled: true,
-            builder: (context) {
-              return AddTaskScreen(
-                addATaskCallback: () {
-                  setState(() => tasks.add(Task(name: taskInput.trim())));
-                  Navigator.pop(context);
-                },
-                updateTaskInputCallback: (newTask) => taskInput = newTask,
-              );
-            }
-          );
+          showModalBottomSheet(context: context, isScrollControlled: true, builder: (context) => AddTaskScreen());
         },
       ),
     );
